@@ -45,7 +45,6 @@ class UserController{
 }
 
     static userLogin = async(req,res)=>{
-        console.log("user login",req.cookies.token)
         try {
             const {email, password} = req.body
             if(email && password){
@@ -150,7 +149,8 @@ class UserController{
                 try {
                     const user = await UserModel.findById(req.user._id)
                     if (user) {
-                        const existingBookmark = user.bookmarksId.includes(id);
+                        const existingBookmark = user.bookmarksId.some(item => item.id == id.id);
+
                        if(!existingBookmark){
                         user.bookmarksId.push(id); 
                         await user.save();
@@ -197,15 +197,14 @@ class UserController{
                     res.send(tvData)
                 } catch (error) {
                    res.status(500).send('Internal Server Error',error);
-                   console.log(error)
+                //    console.log(error)
+
 
                 }
                }
 
                static deleteBookmarks = async(req,res)=>{
-                console.log("001")
                 let tobedeleteid = req.params.id
-                console.log("002",tobedeleteid)
                  if (!tobedeleteid || typeof tobedeleteid !== 'string' || tobedeleteid.trim() === '') {          // Basic input validation
                 return res.status(400).json({ error: 'Invalid bookmarkId' });
                  }else{
@@ -215,7 +214,6 @@ class UserController{
                              // Find the index of the bookmark with the specified ID in the bookmarkId array
                              const existingBookmarkIndex = user.bookmarksId.findIndex((bookmark) => bookmark.id == tobedeleteid);
                             // const existingBookmarkIndex = await Bookmark.findByIdAndDelete(tobedeleteid);
-                            console.log("index",existingBookmarkIndex)
                             if (existingBookmarkIndex !== -1) {
                                 // Remove the bookmark from the array
                                 user.bookmarksId.splice(existingBookmarkIndex, 1);
