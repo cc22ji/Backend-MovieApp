@@ -58,7 +58,7 @@ class UserController{
                         res.cookie("token",token, {
                             sameSite: 'None',
                             secure: true,
-                          }).redirect("http://localhost:3000/home")
+                          }).redirect("https://frontend-movie-app.vercel.app/home")
                         // res.send({"status":"success", "message":"Login Success","token":token})
                     }else{
                         res.send({"status":"failed", "message":"Email or password is wrong"})
