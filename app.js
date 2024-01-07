@@ -11,7 +11,7 @@ const port = process.env.PORT || 8000;
 //use cors
 // app.use(cors())
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://movieapp-backend-x3ry.onrender.com/',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
