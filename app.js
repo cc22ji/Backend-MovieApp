@@ -11,7 +11,7 @@ const port = process.env.PORT || 8000;
 //use cors
 // app.use(cors())
 const corsOptions = {
-    origin: '*',
+    origin: 'https://frontend-movie-app.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
